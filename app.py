@@ -3,6 +3,8 @@ import nltk
 import streamlit as st 
 import pickle
 
+nltk.download('punkt')
+
 model = pickle.load(open("Art/svc.pkl",'rb'))
 
 text = st.text_input('enter your review')
