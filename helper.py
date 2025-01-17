@@ -27,5 +27,5 @@ def text_preprocessing(text):
   ## lemmetization
   text = [stemmer.stem(word) for word in text]
   text = ' '.join(text)
-  text = tf.transform([text])
+  text = tf.transpose([text])
   return text
