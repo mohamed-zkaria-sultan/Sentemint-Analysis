@@ -7,10 +7,6 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-lr = pickle.load(open('lr.pkl', 'rb'))
-tf = pickle.load(open('tf.pkl', 'rb'))
-dt = pickle.load(open('dt.pkl', 'rb'))
-svc = pickle.load(open('svc.pkl', 'rb'))
 
 nltk.download('stopwords')
 nltk.download('punkt')
