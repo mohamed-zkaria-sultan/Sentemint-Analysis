@@ -8,7 +8,6 @@ import pickle
 
 tf = pickle.load(open("Art/tf.pkl",'rb'))
 
-nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('punkt_tab')
 
