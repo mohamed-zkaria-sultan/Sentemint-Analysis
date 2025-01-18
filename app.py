@@ -3,7 +3,6 @@ import nltk
 import streamlit as st 
 import pickle
 
-nltk.download('punkt')
 
 model = pickle.load(open("Art/dt.pkl",'rb'))
 
