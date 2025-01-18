@@ -1,31 +1,50 @@
-from nltk.stem import PorterStemmer
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-import nltk
-import re
+import streamlit as st
 import pickle
+import re
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-tf = pickle.load(open("Art/tf.pkl",'rb'))
+lr = pickle.load(open('lr.pkl', 'rb'))
+tf = pickle.load(open('tf.pkl', 'rb'))
+dt = pickle.load(open('dt.pkl', 'rb'))
+svc = pickle.load(open('svc.pkl', 'rb'))
 
-nltk.download('punkt')
 nltk.download('stopwords')
-nltk.download('punkt_tab')
+nltk.download('punkt')
 
 stop_words = stopwords.words('english')
-stemmer = PorterStemmer()
+stop_words.remove('not')
+stop_words.remove('no')
+
+lemmatizer = WordNetLemmatizer()
+
+analyzer = SentimentIntensityAnalyzer()
 
 def text_preprocessing(text):
-  ## lower case
-  text = text.lower()
-  ## special charcter
-  text = re.sub('[^a-zA-z]', ' ', text)
-  ## Tokinzation
-  text = word_tokenize(text)
-  ## stopwords
-  text = [word for word in text if word not in stop_words]
-  ## lemmetization
-  text = [stemmer.stem(word) for word in text]
-  text = ' '.join(text)
-  text = tf.transform([text])
-  return text
+    text = text.lower()
+    text = re.sub('[^a-zA-Z]', ' ', text)
+    text = word_tokenize(text)
+    text = [word for word in text if word not in stop_words]
+    text = [lemmatizer.lemmatize(word) for word in text]
+    text = ' '.join(text)
+    return text
+
+def predict_feedback(text):
+    processed_text = text_preprocessing(text)
+    sentiment_score = analyzer.polarity_scores(processed_text)
+    
+    if sentiment_score['compound'] > 0:
+        return "Positive"
+    else:
+        return "Negative"
+
+st.title('Product Feedback Prediction')  
+
+user_input = st.text_area("Enter your feedback:", "I don't like this product.")
+
+if st.button('Predict'):
+    prediction = predict_feedback(user_input)
+    st.write(f"Predicted Feedback: {prediction}")
