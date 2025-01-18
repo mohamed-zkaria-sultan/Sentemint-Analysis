@@ -5,7 +5,7 @@ import pickle
 
 nltk.download('punkt')
 
-model = pickle.load(open("Art/svc.pkl",'rb'))
+model = pickle.load(open("Art/dt.pkl",'rb'))
 
 text = st.text_input('enter your review')
 
