@@ -1,16 +1,12 @@
 import helper
-import streamlit as st
+import streamlit as st 
 import pickle
 
-
-model = pickle.load(open("artifacts/lr.pkl", 'rb'))
-
-
+model = pickle.load(open("artifacts/svc.pkl",'rb'))
 
 text = st.text_input('enter your review')
 
 text = helper.text_preprocessing(text)
-pred = model.predict(text)
 
-if st.button("predict") :
-    st.text(pred)
+if st.button("predict"):
+    model.predict(text)
