@@ -14,6 +14,7 @@ svc = pickle.load(open('svc.pkl', 'rb'))
 
 nltk.download('stopwords')
 nltk.download('punkt')
+nltk.download('punkt_tab')
 
 stop_words = stopwords.words('english')
 stop_words.remove('not')
