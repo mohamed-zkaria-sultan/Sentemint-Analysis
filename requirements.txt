@@ -1,4 +1,4 @@
-nltk==3.9.1
-scikit_learn==1.6.0
-streamlit==1.37.1
+nltk
+scikit_learn
+streamlit
 vaderSentiment
