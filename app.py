@@ -43,9 +43,9 @@ def predict_feedback(text):
     else:
         return "Negative"
 
-st.title('Product Feedback Prediction')  
+st.title('Sentiment Feedback Prediction')  
 
-user_input = st.text_area("Enter your feedback:", "I don't like this product.")
+user_input = st.text_area("Enter your feedback:")
 
 if st.button('Predict'):
     prediction = predict_feedback(user_input)
